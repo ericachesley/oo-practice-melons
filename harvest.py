@@ -132,6 +132,25 @@ def make_melons(melon_types):
     melons.append(melon9)
 
     return melons
+
+def make_melons_from_file(filename, melon_types):
+    active_file = open(filename)
+    melon_lookup = make_melon_type_lookup(melon_types)
+    melons = []
+
+    for line in active_file:
+        data = line.rstrip().split()
+        (_, shape_rating, 
+        _, color_rating, 
+        _, melon_type, 
+        _, _, harvester, 
+        _, _, field) = data
+
+        melon = Melon(melon_lookup[melon_type], int(shape_rating), 
+                      int(color_rating), int(field), harvester)
+        melons.append(melon)
+
+    return melons
     
 
 def get_sellability_report(melons):
@@ -146,4 +165,7 @@ def get_sellability_report(melons):
         print(f'Harvested by {melon.harvester} from Field {melon.field} {sellability}')
 
 
+melon_types = make_melon_types()
+melons = make_melons_from_file('harvest_log.txt', melon_types)
+get_sellability_report(melons)
 
