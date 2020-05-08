@@ -92,7 +92,7 @@ class Melon(object):
 
     def is_sellable(self):
         return self.shape_rating > 5 and self.color_rating > 5 \
-        and self.field != 3
+               and self.field != 3
 
     # Fill in the rest
     # Needs __init__ and is_sellable methods
